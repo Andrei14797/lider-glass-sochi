@@ -1,85 +1,39 @@
 import "./Styles.css";
-import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { useMemo, useState } from "react";
 
 const services = [
   {
     title: "Стеклянные перегородки",
     text: "Премиальные перегородки для офисов, ресторанов, переговорных и частных интерьеров.",
-    image: "/images/lider-glass/office-glass-partitions.jpg",
+    image: "/office-glass-partitions.jpg",
     path: "/glass-partitions",
   },
   {
     title: "Стеклянные двери",
     text: "Распашные, раздвижные и маятниковые двери из закалённого стекла.",
-    image: "/images/lider-glass/glass-doors-premium.jpg",
+    image: "/glass-doors-premium.jpg",
     path: "/glass-doors",
   },
   {
     title: "Панорамное остекление",
     text: "Стеклянные системы для вилл, террас, ресторанов и объектов в Сочи.",
-    image: "/images/lider-glass/panoramic-glazing-sochi.jpg",
+    image: "/panoramic-glazing-sochi.jpg",
     path: "/panoramic-glazing",
   },
   {
     title: "Перила из стекла",
     text: "Безопасные стеклянные ограждения для лестниц, балконов, террас и панорамных зон.",
-    image: "/images/lider-glass/sochi-villa-glass.jpg",
+    image: "/sochi-villa-glass.jpg",
     path: "/glass-railings",
   },
   {
     title: "Зеркала, которые расширяют пространство",
     text: "Зеркальные панно, интерьерные зеркала и декоративные решения для премиальных помещений.",
-    image: "/images/lider-glass/luxury-office-lobby.jpg",
+    image: "/luxury-office-lobby.jpg",
     path: "/mirror-solutions",
   },
 ];
-
-const pages = {
-  "/glass-partitions": services[0],
-  "/glass-doors": services[1],
-  "/panoramic-glazing": services[2],
-  "/glass-railings": services[3],
-  "/mirror-solutions": services[4],
-};
-
-const productPrices = {
-  "Стеклянная перегородка": 18000,
-  "Стеклянная дверь": 28000,
-  "Панорамное остекление": 26000,
-  "Перила из стекла": 22000,
-  "Зеркальное панно": 16000,
-};
-
-const glassPrices = {
-  "Прозрачное закалённое": 1,
-  "Матовое": 1.18,
-  "Графитовое": 1.28,
-  "Бронзовое": 1.28,
-  "Smart Glass": 2.4,
-};
-
-const profilePrices = {
-  "Чёрный матовый": 1.15,
-  "Серебристый": 1,
-  "Скрытый профиль": 1.35,
-  "Безрамная система": 1.45,
-};
-
-const montagePrices = {
-  "С монтажом": 25000,
-  "Без монтажа": 0,
-};
-
-const deliveryPrices = {
-  "Екатеринбург → Сочи": 35000,
-  "Самовывоз": 0,
-  "Другой город": 45000,
-};
-
-function formatPrice(value: number) {
-  return new Intl.NumberFormat("ru-RU").format(Math.round(value));
-}
 
 function Header() {
   return (
@@ -104,24 +58,6 @@ function Header() {
   );
 }
 
-function FinalCta() {
-  return (
-    <section className="section finalCta">
-      <div className="container finalCtaBox">
-        <span className="miniLabel">START PROJECT</span>
-        <h2>Хотите увидеть решение на своём объекте?</h2>
-        <p>
-          Пришлите фото, размеры или описание задачи. Мы подготовим консультацию,
-          предварительный расчёт и предложим вариант визуализации.
-        </p>
-        <Link className="whiteBtn" to="/contacts">
-          Обсудить проект
-        </Link>
-      </div>
-    </section>
-  );
-}
-
 function Footer() {
   return (
     <footer className="footer">
@@ -138,6 +74,24 @@ function Footer() {
         </a>
       </div>
     </footer>
+  );
+}
+
+function FinalCta() {
+  return (
+    <section className="section finalCta">
+      <div className="container finalCtaBox">
+        <span className="miniLabel">START PROJECT</span>
+        <h2>Хотите увидеть решение на своём объекте?</h2>
+        <p>
+          Пришлите фото, размеры или описание задачи. Мы подготовим консультацию,
+          предварительный расчёт и вариант визуализации.
+        </p>
+        <Link className="whiteBtn" to="/contacts">
+          Обсудить проект
+        </Link>
+      </div>
+    </section>
   );
 }
 
@@ -162,7 +116,6 @@ function HomePage() {
               <Link className="whiteBtn" to="/constructor">
                 Собрать изделие
               </Link>
-
               <a className="darkBtn" href="#services">
                 Смотреть услуги
               </a>
@@ -203,56 +156,11 @@ function HomePage() {
           <div className="ctaBox">
             <p>
               Выберите тип изделия, стекло, профиль, размеры, монтаж и доставку.
-              Сайт рассчитает предварительную стоимость, а затем вы сможете
-              отправить заявку менеджеру.
+              Сайт рассчитает предварительную стоимость.
             </p>
-
             <Link className="whiteBtn" to="/constructor">
               Открыть конструктор
             </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="section white" id="turnkey">
-        <div className="container">
-          <div className="sectionTitle">
-            <span>TURNKEY</span>
-            <h2>Изготовление, доставка и монтаж под ключ</h2>
-          </div>
-
-          <div className="cards">
-            <article className="card lightCard">
-              <img src="/images/lider-glass/glass-production-factory.jpg" alt="Производство" />
-              <div className="cardBody">
-                <h3>Технология изготовления</h3>
-                <p>Проектируем и изготавливаем конструкции по индивидуальным размерам.</p>
-              </div>
-            </article>
-
-            <article className="card lightCard">
-              <img src="/images/lider-glass/delivery-ekaterinburg-sochi.jpg" alt="Доставка" />
-              <div className="cardBody">
-                <h3>Доставка Екатеринбург → Сочи</h3>
-                <p>Организуем безопасную доставку стеклянных изделий транспортной компанией.</p>
-              </div>
-            </article>
-
-            <article className="card lightCard">
-              <img src="/images/lider-glass/glass-installation-premium.jpg" alt="Монтаж" />
-              <div className="cardBody">
-                <h3>Монтаж под ключ</h3>
-                <p>Выполняем аккуратный монтаж с контролем геометрии и финального вида.</p>
-              </div>
-            </article>
-
-            <article className="card lightCard">
-              <img src="/images/lider-glass/3d-glass-visualization.jpg" alt="Визуализация" />
-              <div className="cardBody">
-                <h3>Визуализация проекта</h3>
-                <p>Показываем будущий результат ещё до начала производства.</p>
-              </div>
-            </article>
           </div>
         </div>
       </section>
@@ -273,33 +181,41 @@ function ConstructorPage() {
   const [delivery, setDelivery] = useState("Екатеринбург → Сочи");
 
   const price = useMemo(() => {
-    const widthMeters = Number(width) / 1000 || 0;
-    const heightMeters = Number(height) / 1000 || 0;
-    const area = Math.max(widthMeters * heightMeters, 1);
+    const base: Record<string, number> = {
+      "Стеклянная перегородка": 18000,
+      "Стеклянная дверь": 28000,
+      "Панорамное остекление": 26000,
+      "Перила из стекла": 22000,
+      "Зеркальное панно": 16000,
+    };
 
-    const base =
-      productPrices[product as keyof typeof productPrices] * area;
+    const glassRate: Record<string, number> = {
+      "Прозрачное закалённое": 1,
+      "Матовое": 1.18,
+      "Графитовое": 1.28,
+      "Бронзовое": 1.28,
+      "Smart Glass": 2.4,
+    };
 
-    const glassMultiplier =
-      glassPrices[glass as keyof typeof glassPrices];
+    const profileRate: Record<string, number> = {
+      "Чёрный матовый": 1.15,
+      "Серебристый": 1,
+      "Скрытый профиль": 1.35,
+      "Безрамная система": 1.45,
+    };
 
-    const profileMultiplier =
-      profilePrices[profile as keyof typeof profilePrices];
+    const area = Math.max((Number(width) / 1000) * (Number(height) / 1000), 1);
+    const montagePrice = montage === "С монтажом" ? 25000 : 0;
+    const deliveryPrice =
+      delivery === "Екатеринбург → Сочи" ? 35000 : delivery === "Другой город" ? 45000 : 0;
 
-    const montageCost =
-      montagePrices[montage as keyof typeof montagePrices];
-
-    const deliveryCost =
-      deliveryPrices[delivery as keyof typeof deliveryPrices];
-
-    return base * glassMultiplier * profileMultiplier + montageCost + deliveryCost;
+    return Math.round(base[product] * area * glassRate[glass] * profileRate[profile] + montagePrice + deliveryPrice);
   }, [product, glass, profile, width, height, montage, delivery]);
 
   return (
     <main>
       <section className="pageHero constructorHero">
         <Header />
-
         <div className="pageHeroContent">
           <div className="tag">ONLINE CONSTRUCTOR</div>
           <h1>Соберите стеклянное изделие под заказ</h1>
@@ -312,8 +228,7 @@ function ConstructorPage() {
           <div className="constructorPanel">
             <h2>Параметры изделия</h2>
 
-            <label>
-              Тип изделия
+            <label>Тип изделия
               <select value={product} onChange={(e) => setProduct(e.target.value)}>
                 <option>Стеклянная перегородка</option>
                 <option>Стеклянная дверь</option>
@@ -323,8 +238,7 @@ function ConstructorPage() {
               </select>
             </label>
 
-            <label>
-              Тип стекла
+            <label>Тип стекла
               <select value={glass} onChange={(e) => setGlass(e.target.value)}>
                 <option>Прозрачное закалённое</option>
                 <option>Матовое</option>
@@ -334,8 +248,7 @@ function ConstructorPage() {
               </select>
             </label>
 
-            <label>
-              Профиль
+            <label>Профиль
               <select value={profile} onChange={(e) => setProfile(e.target.value)}>
                 <option>Чёрный матовый</option>
                 <option>Серебристый</option>
@@ -344,36 +257,22 @@ function ConstructorPage() {
               </select>
             </label>
 
-            <label>
-              Ширина, мм
-              <input
-                type="number"
-                value={width}
-                onChange={(e) => setWidth(e.target.value)}
-                placeholder="Например: 3000"
-              />
+            <label>Ширина, мм
+              <input value={width} onChange={(e) => setWidth(e.target.value)} type="number" />
             </label>
 
-            <label>
-              Высота, мм
-              <input
-                type="number"
-                value={height}
-                onChange={(e) => setHeight(e.target.value)}
-                placeholder="Например: 2500"
-              />
+            <label>Высота, мм
+              <input value={height} onChange={(e) => setHeight(e.target.value)} type="number" />
             </label>
 
-            <label>
-              Монтаж
+            <label>Монтаж
               <select value={montage} onChange={(e) => setMontage(e.target.value)}>
                 <option>С монтажом</option>
                 <option>Без монтажа</option>
               </select>
             </label>
 
-            <label>
-              Доставка
+            <label>Доставка
               <select value={delivery} onChange={(e) => setDelivery(e.target.value)}>
                 <option>Екатеринбург → Сочи</option>
                 <option>Самовывоз</option>
@@ -385,23 +284,11 @@ function ConstructorPage() {
           <div className="constructorSummary">
             <span className="miniLabel darkLabel">PRELIMINARY PRICE</span>
             <h2>Предварительный расчёт</h2>
-
-            <div className="priceBox">от {formatPrice(price)} ₽</div>
-
+            <div className="priceBox">от {price.toLocaleString("ru-RU")} ₽</div>
             <p>
-              Стоимость является ориентировочной. Финальный расчёт зависит от
-              точных размеров, типа стекла, фурнитуры, сложности монтажа и логистики.
+              Стоимость ориентировочная. Финальный расчёт зависит от точных размеров,
+              фурнитуры, монтажа и логистики.
             </p>
-
-            <div className="detailList">
-              <div className="detailItem">Изделие: {product}</div>
-              <div className="detailItem">Стекло: {glass}</div>
-              <div className="detailItem">Профиль: {profile}</div>
-              <div className="detailItem">Размер: {width || 0} × {height || 0} мм</div>
-              <div className="detailItem">Монтаж: {montage}</div>
-              <div className="detailItem">Доставка: {delivery}</div>
-            </div>
-
             <Link className="whiteBtn" to="/constructor/client">
               Отправить менеджеру
             </Link>
@@ -420,11 +307,10 @@ function ConstructorClientPage() {
     <main>
       <section className="pageHero contactPageHero">
         <Header />
-
         <div className="pageHeroContent">
           <div className="tag">CLIENT DATA</div>
           <h1>Контактные данные</h1>
-          <p>Оставьте имя и телефон, чтобы менеджер связался с вами и уточнил детали.</p>
+          <p>Оставьте имя и телефон, чтобы менеджер связался с вами.</p>
         </div>
       </section>
 
@@ -434,8 +320,7 @@ function ConstructorClientPage() {
             <span className="miniLabel">REQUEST</span>
             <h2 className="contactTitle">Отправить расчёт менеджеру</h2>
             <p className="contactText">
-              После отправки заявки менеджер сможет уточнить размеры, тип стекла,
-              фурнитуру, сроки изготовления, доставку и монтаж.
+              Менеджер уточнит размеры, стекло, фурнитуру, сроки, доставку и монтаж.
             </p>
           </div>
 
@@ -456,28 +341,22 @@ function ConstructorClientPage() {
   );
 }
 
-function ServicePage({ type }: { type: keyof typeof pages }) {
-  const data = pages[type];
-  const navigate = useNavigate();
+function ServicePage({ title }: { title: string }) {
+  const item = services.find((service) => service.title === title) || services[0];
 
   return (
     <main>
       <section
         className="pageHero"
         style={{
-          backgroundImage: `linear-gradient(90deg,rgba(0,0,0,.9),rgba(0,0,0,.45)), url(${data.image})`,
+          backgroundImage: `linear-gradient(90deg,rgba(0,0,0,.9),rgba(0,0,0,.45)), url(${item.image})`,
         }}
       >
         <Header />
-
         <div className="pageHeroContent">
-          <button className="backBtn" onClick={() => navigate("/")}>
-            ← На главную
-          </button>
-
           <div className="tag">LIDER GLASS SOCHI</div>
-          <h1>{data.title}</h1>
-          <p>{data.text}</p>
+          <h1>{item.title}</h1>
+          <p>{item.text}</p>
         </div>
       </section>
 
@@ -487,13 +366,10 @@ function ServicePage({ type }: { type: keyof typeof pages }) {
             <span>DETAILS</span>
             <h2>Подробнее об услуге</h2>
           </div>
-
           <p className="detailText">
             Мы подбираем стеклянное решение под объект, интерьер, сценарий
-            использования и визуальный стиль пространства. Каждая конструкция
-            проектируется индивидуально.
+            использования и визуальный стиль пространства.
           </p>
-
           <Link className="whiteBtn" to="/contacts">
             Получить расчёт
           </Link>
@@ -511,7 +387,6 @@ function ContactsPage() {
     <main>
       <section className="pageHero contactPageHero">
         <Header />
-
         <div className="pageHeroContent">
           <div className="tag">CONTACT</div>
           <h1>Обсудим ваш проект?</h1>
@@ -519,15 +394,12 @@ function ContactsPage() {
         </div>
       </section>
 
-      <section className="section contact" id="contacts">
+      <section className="section contact">
         <div className="container contactBox">
           <div>
             <span className="miniLabel">CONTACT</span>
             <h2 className="contactTitle">Связаться с LIDER GLASS</h2>
-
-            <p className="contactText">
-              Работаем с объектами в Сочи, Красной Поляне и Краснодарском крае.
-            </p>
+            <p className="contactText">Работаем с объектами в Сочи, Красной Поляне и Краснодарском крае.</p>
 
             <div className="contactLinks">
               <a href="tel:+79000370094">+7 (900) 037-00-94</a>
@@ -562,11 +434,11 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/constructor" element={<ConstructorPage />} />
         <Route path="/constructor/client" element={<ConstructorClientPage />} />
-        <Route path="/glass-partitions" element={<ServicePage type="/glass-partitions" />} />
-        <Route path="/glass-doors" element={<ServicePage type="/glass-doors" />} />
-        <Route path="/panoramic-glazing" element={<ServicePage type="/panoramic-glazing" />} />
-        <Route path="/glass-railings" element={<ServicePage type="/glass-railings" />} />
-        <Route path="/mirror-solutions" element={<ServicePage type="/mirror-solutions" />} />
+        <Route path="/glass-partitions" element={<ServicePage title="Стеклянные перегородки" />} />
+        <Route path="/glass-doors" element={<ServicePage title="Стеклянные двери" />} />
+        <Route path="/panoramic-glazing" element={<ServicePage title="Панорамное остекление" />} />
+        <Route path="/glass-railings" element={<ServicePage title="Перила из стекла" />} />
+        <Route path="/mirror-solutions" element={<ServicePage title="Зеркала, которые расширяют пространство" />} />
         <Route path="/contacts" element={<ContactsPage />} />
       </Routes>
     </BrowserRouter>
